@@ -13,7 +13,7 @@ from utils.print import trainable_params
 # Save huggingface token
 os.system('cp ../tokens/huggingface.txt /home/ubuntu/.cache/huggingface/token')
 
-model_name = "meta-llama/Llama-2-7b-chat-hf"
+#model_name = "meta-llama/Llama-2-7b-chat-hf"
 model_name = "meta-llama/Llama-2-7b-hf"
 
 model = AutoModelForCausalLM.from_pretrained(
