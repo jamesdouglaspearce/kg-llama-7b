@@ -9,7 +9,7 @@ os.system('cp ../tokens/huggingface.txt /home/ubuntu/.cache/huggingface/token')
 
 
 model_name = "meta-llama/Llama-2-7b-hf"
-checkpoint_path = "../model_artifacts/checkpoint-1000"
+checkpoint_path = "../model_artifacts/checkpoint-4900"
 
 print(f"Starting to load the model {model_name} into memory")
 
@@ -36,14 +36,21 @@ pipeline = transformers.pipeline(
 #tok.bos_token_id = 1
 #stop_token_ids = [0]
 
+test = ["Jason is John's father's brother. His is 17 years old. -> ",
+        "You have modified the pretrained model configuration to control generation. This is a deprecated strategy to control generation and will be removed soon, in a future version. -> ",
+        "HD 115600 has an apparent magnitude of 8.22. -> ",
+        "Canta Comigo is a Brazilian television channel. -> ",
+        "The Combat: Woman Pleading for the Vanquished is made of oil paint. -> "]
+
 sequences = pipeline(
-    "Jason is John's father ->",
+    test,
     top_k=10,
     num_return_sequences=1,
     eos_token_id=tokenizer.eos_token_id,
     max_length=200,
 )
 for seq in sequences:
-    print(f"Result: {seq['generated_text']}")
+    for sub in seq:
+        print(f"Result: {sub['generated_text']}")
 
 
